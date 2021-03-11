@@ -67,24 +67,12 @@ WantedBy=multi-user.target
 		mkdir -p /etc/filebrowser
 		cat >/etc/filebrowser/filebrowser.json <<-EOF
 {
-  "port": 8848, // Filebrowser 监听的端口
-  "noAuth": false,
-  "baseURL": "",//"/233blog", // 访问 Filebrowser 的路径
-  "address": "0.0.0.0",
-  "reCaptchaKey": "",
-  "reCaptchaSecret": "",
-  "database": "/etc/filebrowser/database.db", // Filebrowser 数据库的路径
-  "log": "stdout",
-  "plugin": "",
-  "scope": "/etc/filebrowser/", // Filebrowser 可管理的目录
-  "allowEdit": true,
-  "allowNew": true,
-  "allowCommands": true,
-  "commands": [
-    "ls",
-    "git",
-    "svn"
-  ]
+    "port": 8848,
+    "baseURL": "",
+    "address": "",
+    "log": "stdout",
+    "database": "/etc/filebrowser/database.db",
+    "root": "/etc/filebrowser/"
 }
 		EOF
 
@@ -143,8 +131,6 @@ while :; do
 	echo
 	echo " 2. 卸载"
 	echo
-	echo " 3. 重启"
-	echo
 	read -p "请选择[1-2]:" choose
 	case $choose in
 	1)
@@ -153,10 +139,6 @@ while :; do
 		;;
 	2)
 		uninstall
-		break
-		;;
-	3)
-		systemctl restart filebrowser
 		break
 		;;
 	*)
